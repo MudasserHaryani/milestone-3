@@ -1,10 +1,9 @@
 import { client } from "@/sanity/lib/client";
-import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import {PortableText} from '@portabletext/react'
 import { components } from "@/app/components/CustomComponents";
 
-export default async function page({params:{slug}}:{slug:string}) {
+export default async function page({params:{slug}}:{slug:any}) {
   const query = `*[_type == 'post' && slug.current =="${slug}" ]{
   title, "imageUrl":image.asset->url, summary, content, 
     author->{bio, "imageUrl":image.asset->url, name}
