@@ -3,12 +3,12 @@ import Image from "next/image";
 import {PortableText} from '@portabletext/react'
 import { components } from "@/app/components/CustomComponents";
 
-export default async function page({params:{slug}}:{slug:any}) {
-  const query = `*[_type == 'post' && slug.current =="${slug}" ]{
+export default async function page({params:{slug}}:{params:{slug: string}}) {
+  const query = `*[_type == 'post' && slug.current == "${slug}" ]{
   title, "imageUrl":image.asset->url, summary, content, 
     author->{bio, "imageUrl":image.asset->url, name}
 }[0] `;
-const post = await client.fetch(query);
+const post:PostDynamic = await client.fetch(query);
   
   return (
     <article className="mt-12 mb-24 px-2 2xl:px-12 flex flex-col gap-y-8">
